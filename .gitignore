@@ -218,3 +218,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# bot runtime
+data/*
+!data/.gitkeep
+state/

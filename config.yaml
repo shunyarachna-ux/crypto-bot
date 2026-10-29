@@ -1,0 +1,42 @@
+# mode: backtest | paper | live  (never set live without the owner's explicit decision)
+mode: paper
+exchange: binance          # ccxt id used for public data / research
+symbols: [BTC/USDT:USDT, ETH/USDT:USDT]
+timeframe: 1h
+trend_timeframe: 4h
+state_dir: state
+data_dir: data
+
+risk:
+  risk_per_trade: 0.01        # 1% of account
+  max_leverage: 2.0           # hard ceiling 3.0
+  daily_loss_limit: 0.03
+  max_drawdown: 0.15
+  max_open_positions: 1
+  liquidation_buffer: 3.0     # liq distance >= 3x stop distance
+  maintenance_margin: 0.005
+  max_data_age_candles: 2
+  max_candle_jump: 0.15       # skip if a candle moves more than 15%
+
+costs:
+  maker_fee: 0.0002
+  taker_fee: 0.0005
+  gst_on_fees: 0.18
+  slippage: 0.0003            # per side, fraction of price
+  tax_on_wins: 0.30           # per winning trade, no loss set-off
+  default_funding_8h: 0.0001  # used only where no funding history exists
+
+strategy:
+  name: trend_ema
+  use_regime: false           # add ADX regime switch only after trend passes alone
+  atr_period: 14
+  stop_atr: 1.5
+  target_atr: 3.0
+  exit_mode: smart            # fixed | trail2 | smart | smart_no_half
+  entry_order: limit_fallback # market | limit_fallback
+  params: {ema_fast: 20, ema_slow: 50, trend_ema: 50}
+
+alerts:
+  heartbeat_hours: 4
+
+paper_equity: 10000

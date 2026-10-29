@@ -1,0 +1,6 @@
+numpy>=1.26
+pandas>=2.1
+PyYAML>=6.0
+requests>=2.31
+ccxt>=4.3        # exchange access (REST). Optional for backtests on local data.
+pytest>=8.0
